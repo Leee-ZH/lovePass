@@ -1,0 +1,13 @@
+body {
+  font-family: Arial, sans-serif;
+}
+.section {
+  margin: 20px;
+}
+
+button {
+  padding: 5px 16px;
+  border-radius: 4px;
+}
+
+#seed {color: green;}
