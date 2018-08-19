@@ -1,20 +1,22 @@
 pragma solidity ^0.4.24;
 
-contract lovePass {
+contract Migrations {
 
-    struct ngo {
-        string name;
-        string intr;
-        bytes32 passHash;
-        string[] doNaList;
-        mapping (string => address) doList;
-    }
+  struct ngo {
+      string name;
+      string intr;
+      bytes32 passHash;
+      string[] doNaList;
+      mapping (string => address) doList;
+  }
 
-    struct per {
-        string name;
-        bytes32 passHash;
-    }
+  struct per {
+      string name;
+      bytes32 passHash;
+  }
 
+  address[] ngoAdList;
+  uint public last_completed_migration;
 	mapping (address => ngo) public ngolist;
 	mapping (address => per) public perlist;
 
@@ -22,13 +24,22 @@ contract lovePass {
 	event createPer(string ngo, address addr);
 	event addDona(address ng, string eventna, address addr);
 
+  constructor() public {
+	    return;
+	}
+
+  function setCompleted(uint completed) public {
+    last_completed_migration = completed;
+  }
+
     // -----------------------------------------------------------------------
 
 	function crNgo(string nam, string pass, string intr, address ad) internal {
-	    string[] memory tmp = new string[](1);
-        tmp[0] = " ";
-	    ngo memory tmpNgo = ngo(nam, intr, sha256(abi.encodePacked(pass)), tmp);
-	    ngolist[ad] = tmpNgo;
+	  string[] memory tmp = new string[](1);
+    tmp[0] = " ";
+	  ngo memory tmpNgo = ngo(nam, intr, sha256(abi.encodePacked(pass)), tmp);
+	  ngolist[ad] = tmpNgo;
+    ngoAdList.push(ad);
 		emit createNgo(nam, ad);
 	}
 
@@ -45,6 +56,10 @@ contract lovePass {
 	function reDoAdList(address ng, string na) internal view returns (address){
 	    return ngolist[ng].doList[na];
 	}
+
+  function reNgoList() public view returns (address[]) {
+  	    return ngoAdList;
+  	}
 
 	// -------------------------------------------------------------------------
 

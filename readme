@@ -1,0 +1,5 @@
+cd /Users/wave/Downloads/Pohang/lovePass
+sudo truffle compile --compile-all
+sudo truffle migrate --reset
+sudo npm run start
+sudo npm run server
