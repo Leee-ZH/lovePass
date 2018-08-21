@@ -15,6 +15,7 @@
 module.exports = {
   networks: {
     development: {
+      gas: 3141592,
       host: "localhost",
       port: 8545,
       network_id: "*" // 匹配任何network id

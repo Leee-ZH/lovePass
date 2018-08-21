@@ -8,6 +8,8 @@ truffle
 
 记录经常用的命令  
 
+ganache-cli --port="8545"
+
 cd /Users/wave/Downloads/Pohang/lovePass  
 sudo truffle compile --compile-all  
 sudo truffle migrate --reset  

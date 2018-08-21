@@ -1,3 +1,4 @@
+pragma experimental ABIEncoderV2;
 pragma solidity ^0.4.24;
 
 contract Migrations {
@@ -34,26 +35,33 @@ contract Migrations {
 
     // -----------------------------------------------------------------------
 
-	function crNgo(string nam, string pass, string intr, address ad) internal {
+	function crNgo(string nam, string pass, string intr, address ad) public {
+	    for (uint i = 0; i < ngoAdList.length; i++)
+	    {
+	        if (ngoAdList[i] == ad) { return; }
+	        else {
+	            continue;
+	        }
+	    }
 	  string[] memory tmp = new string[](1);
     tmp[0] = " ";
 	  ngo memory tmpNgo = ngo(nam, intr, sha256(abi.encodePacked(pass)), tmp);
 	  ngolist[ad] = tmpNgo;
-    ngoAdList.push(ad);
+        ngoAdList.push(ad);
 		emit createNgo(nam, ad);
 	}
 
-	function ngoAddDona(address ng, string name, address donaAd) internal {
+	function ngoAddDona(address ng, string name, address donaAd) public {
 	    ngolist[ng].doList[name] = donaAd;
 	    ngolist[ng].doNaList.push(name);
 	    emit addDona(ng, name, donaAd);
 	}
 
-	function reDoNaList(address ng) internal view returns (string[]) {
+	function reDoNaList(address ng) public view returns (string[]) {
 	    return ngolist[ng].doNaList;
 	}
 
-	function reDoAdList(address ng, string na) internal view returns (address){
+	function reDoAdList(address ng, string na) public view returns (address){
 	    return ngolist[ng].doList[na];
 	}
 
