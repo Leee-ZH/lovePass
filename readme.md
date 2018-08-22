@@ -15,8 +15,13 @@ truffle
 记录经常用的命令  
 <<<<<<< HEAD
 
+<<<<<<< HEAD
 =======
 >>>>>>> 24e05fa9c0300d4054e7f84b1ebcace8b13b8f6a
+=======
+ganache-cli --port="8545"
+
+>>>>>>> test
 cd /Users/wave/Downloads/Pohang/lovePass  
 sudo truffle compile --compile-all  
 sudo truffle migrate --reset  
