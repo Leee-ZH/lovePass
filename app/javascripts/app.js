@@ -29,6 +29,7 @@ window.addEventListener('load', function() {
 
     $("#showNgoList").click(function() {
         App.reNgoList();
+        App.updateShow();
     });
 
     $("#createNgo").click(function(){
@@ -84,6 +85,16 @@ window.App = {
                     console.log(e);
                 }
             );
+        });
+    },
+
+    updateShow: function() {
+        var self = this;
+        Migrations.deployed().then(function(instance) {
+            sim = instance;
+            $("#NgoInf").innerHTML = sim.reNgoList();
+        }).catch(function(e) {
+            console.log(e);
         });
     }
 
