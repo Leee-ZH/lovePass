@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bug Pass</title>
-  <script src="./app.js" type=”text/javascript”></script>
+  <script src="./app.js" type="text/javascript"></script>
   <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -54,7 +54,7 @@
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal"> Close </button>
-                  <button id="createNgo" type="button" class="btn btn-primary"> Regiter </button>
+                  <button id="createNgo" type="submit" class="btn btn-primary"> Regiter </button>
               </div>
           </div>
       </div>
@@ -67,19 +67,19 @@
                 <table class="table">
                   <tr>
                     <th> <p class="text-left">Name: </p> </th>
-                    <th> <input/> </th>
+                    <th> <input id="companyName"/> </th>
                   </tr>
                   <tr>
                     <th> <p class="text-left">Password: </p> </th>
-                    <th> <input/> </th>
+                    <th> <input id="passWord"/> </th>
                   </tr>
                 </table>
                 </form>
                   <input type="hidden" id="act" value="add" name="act"/>
               </div>
               <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close  </button>
-                  <button type="button" onclick="add_info()" class="btn btn-primary">Log In <button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">close  </button>
+                  <button type="button" onclick="add_info()" class="btn btn-primary">log in <button>
               </div>
           </div>
       </div>
@@ -88,27 +88,23 @@
 
   <!--公司介绍 -->
   <a href="#" class="lead">company</a>
-  <p>introduceintroduceintroduceintroduceintroduceintroduceintroduceintroduceintroduceintroduceintroduceintroduceintroduceintroduceintroduce</p>
+  <p id="introduction">introduceintroduceintroduceintroduceintroduceintroduceintroduceintroduceintroduceintroduceintroduceintroduceintroduceintroduceintroduce</p>
 
   <!--接收人信息 -->
   <table class="table table-striped">
     <h1 class="text-center">Receiver information</h1>
-    <input id="NgoInf"> </input>
     <thead>
       <tr>
         <th>Name</th>
         <th>Address</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="receiverInfo">
       <tr>
-        <td>P1</td>
-        <td>xxxxxxxxxxxx</td>
+        <td>无</td>
+        <td>无</td>
       </tr>
-      <tr>
-        <td>P2</td>
-        <td>yyyyyyyyyyyy</td>
-      </tr>
+
     </tbody>
   </table>
 
@@ -124,24 +120,60 @@
            <th>Detail</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="transaction">
         <tr>
-           <td>p1</td>
-           <td>100</td>
-           <td>xxxxxxxxxxxxxx</td>
+           <td>无</td>
+           <td>无</td>
+           <td>无</td>
         </tr>
-        <tr>
-           <td>p2</td>
-           <td>200</td>
-           <td>yyyyyyyyyyyyyy</td>
-        </tr>
+
       </tbody>
     </table>
 
+			<a href="template/trade.html" style="display: block; width: 50px;line-height: 35px; background: burlywood;text-align: center; border-radius: 5px;margin: 0 auto;" >trade</a>
       <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
       <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+	<script>
+		var name = sessionStorage.getItem('name');
+		var address = sessionStorage.getItem('address');
+		var tradeInfo = sessionStorage.getItem('tradeInfo');
+				console.log(tradeInfo);
 
+
+		if(name!=null){
+			console.log(1);
+			$('#introduction')[0].innerHTML = name;
+		}
+		if(address!=null){
+			console.log(2);
+		}
+		if(tradeInfo !=null){
+			var amountInfo = tradeInfo.split(',');
+			console.log(amountInfo);
+			var len = amountInfo.length;
+			var len1 = len/4;
+			var str1 = '';
+			var str2 = '';
+			for(var i=0; i<len1; i++){
+				 str1 += '<tr><td>' + amountInfo[i*4] + '</td><td>' + amountInfo[i*4+2] + '</td></tr>';
+				 str2 += '<tr><td>' + amountInfo[i*4] + '</td><td>' + amountInfo[i*4+1]+ '</td><td>' + amountInfo[i*4+3] + '</td></tr>';
+
+			}
+			$('#receiverInfo')[0].innerHTML = str1;
+			$('#transaction')[0].innerHTML = str2;
+			console.log(len)
+
+		}
+
+		function add_info(){
+
+    		sessionStorage.setItem('name',$("#companyName").val()) //缓存公司名称
+//  		App.lginNgo(String($("#companyName").val()), $("#passWord").val());
+    		location.reload();
+    };
+
+	</script>
 </body>
 
 </html>

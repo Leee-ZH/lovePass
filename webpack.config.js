@@ -47,6 +47,10 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: "./app/index.html",
       filename: "./index.html"
+    }),
+    new HtmlWebPackPlugin({
+      template: "./app/template/trade.html",
+      filename: "./template/trade.html"
     })
   ]
 };
